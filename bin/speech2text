@@ -1,0 +1,17 @@
+#!/this/will/be/replaced/by/rubygems
+# -*- encoding: binary -*-
+
+require 'speech'
+
+if ARGV[0].nil?
+  STDERR.puts "usage: #{$0} <input file|url>"
+  exit(1)
+end
+
+# loop
+#   #call rec through ruby-command line interface
+#   # call the thing that records 5 seconds of audio, save to FILE_WHERE_AUDIO_IS
+#   Speech::AudioToText.new(FILE_WHERE_AUDIO_IS).to_text
+end
+
+# Speech::AudioToText.new(ARGV[0]).to_text

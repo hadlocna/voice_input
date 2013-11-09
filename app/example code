@@ -1,0 +1,18 @@
+<% system 'sox -d temp2.wav trim 0 00:05' %>
+
+<% audio = Speech::AudioToText.new("temp2.wav") %>
+<% if audio != [] %>
+<p><%= audio.to_text.inspect %></p>
+<p><%= audio.inspect %></p>
+<% phrase = audio.to_text.inspect  %>
+<% phrase.gsub!(/\A"|"\Z/, '') %>
+<% array = phrase.split(" ") %>
+<% array.each do |word| %>
+<p> <%= word %></p>
+<% Word.create(word_instance: word) %>
+<% end %>
+<% end %>
+<% freq = Word.group(:word_instance).count %>
+
+<% list = freq.sort_by{|word, count| count}.reverse %>
+<p>Word: <%= list[0][0] %> Frequency: <%= list[0][1] %></p>
