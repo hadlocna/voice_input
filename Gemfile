@@ -17,6 +17,7 @@ gem 'rake'
 
 gem 'shotgun'
 gem 'speech2text'
+gem "debugger"
 
 group :test do
   gem 'faker'

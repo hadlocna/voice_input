@@ -1,5 +1,6 @@
 require 'rake'
 require 'rspec/core/rake_task'
+require 'debugger'
 
 
 require ::File.expand_path('../config/environment', __FILE__)

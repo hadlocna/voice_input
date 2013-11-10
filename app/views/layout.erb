@@ -1,4 +1,6 @@
+
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
   <meta http-equiv="refresh" content="40" />
@@ -13,10 +15,11 @@
   <link rel="stylesheet" href="/css/application.css">
 
 
-    <% system 'sox -d temp2.wav trim 0 00:25' %>
+    <% system 'sox -d temp2.wav trim 0 00:05' %>
 
     <% audio = Speech::AudioToText.new("temp2.wav") %>
-    <% if audio != [[]]  %>
+    <% whatisit(audio)%>
+    <% if audio.best_match_text != "" %>
 
     <% phrase = audio.to_text.inspect  %>
     <% phrase.gsub!(/\A"|"\Z/, '') %>
@@ -31,17 +34,21 @@
     <% freq = Word.group(:word_instance).count %>
 
     <% list = freq.sort_by{|word, count| count}.reverse %>
-
+    <% if list.length > 5 %>
     <a id='word0'><%= list[0][0]%></a>
     <a id='word1'><%= list[1][0]%></a>
     <a id='word2'><%= list[2][0]%></a>
     <a id='word3'><%= list[3][0]%></a>
     <a id='word4'><%= list[4][0]%></a>
+    <%end %>
+    <% if list.length > 10 %>
     <a id='word5'><%= list[5][0]%></a>
     <a id='word6'><%= list[6][0]%></a>
     <a id='word7'><%= list[7][0]%></a>
     <a id='word8'><%= list[8][0]%></a>
     <a id='word9'><%= list[9][0]%></a>
+    <%end %>
+     <% if list.length > 110 %>
     <a id='word10'><%= list[10][0]%></a>
     <a id='word11'><%= list[11][0]%></a>
     <a id='word12'><%= list[12][0]%></a>
@@ -52,6 +59,7 @@
     <a id='word17'><%= list[17][0]%></a>
     <a id='word18'><%= list[18][0]%></a>
     <a id='word19'><%= list[19][0]%></a>
+    <%end %>
 
 
 

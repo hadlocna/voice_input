@@ -5,9 +5,9 @@ get '/' do
   erb :index
 end
 
-# post '/' do
+post '/clear' do
 
-#   p params[:speech].inspect
-#   redirect '/'
-# end
+Word.destroy_all
+redirect '/'
+end
 
