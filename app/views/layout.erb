@@ -1,30 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-   <link rel="stylesheet" type="text/css" href="jqcloud.css" />
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
-    <script type="text/javascript" src="jqcloud-1.0.4.js"></script>
+  <meta http-equiv="refresh" content="40" />
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jqcloud.js"></script>
 
   <link rel="stylesheet" href="/css/normalize.css">
+  <link rel="stylesheet" type="text/css" href="/css/jqcloud.css" />
   <!--
     application.css is where you put your styles
   -->
   <link rel="stylesheet" href="/css/application.css">
 
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+    <% system 'sox -d temp2.wav trim 0 00:25' %>
+
+    <% audio = Speech::AudioToText.new("temp2.wav") %>
+    <% if audio != [[]]  %>
+
+    <% phrase = audio.to_text.inspect  %>
+    <% phrase.gsub!(/\A"|"\Z/, '') %>
+    <% array = phrase.split(" ") %>
+    <% array.each do |word| %>
+
+    <% Word.create(word_instance: word) %>
+    <% end %>
+    <% end %>
 
 
-  <script type="text/javascript">
+    <% freq = Word.group(:word_instance).count %>
+
+    <% list = freq.sort_by{|word, count| count}.reverse %>
+
+    <a id='word0'><%= list[0][0]%></a>
+    <a id='word1'><%= list[1][0]%></a>
+    <a id='word2'><%= list[2][0]%></a>
+    <a id='word3'><%= list[3][0]%></a>
+    <a id='word4'><%= list[4][0]%></a>
+    <a id='word5'><%= list[5][0]%></a>
+    <a id='word6'><%= list[6][0]%></a>
+    <a id='word7'><%= list[7][0]%></a>
+    <a id='word8'><%= list[8][0]%></a>
+    <a id='word9'><%= list[9][0]%></a>
+    <a id='word10'><%= list[10][0]%></a>
+    <a id='word11'><%= list[11][0]%></a>
+    <a id='word12'><%= list[12][0]%></a>
+    <a id='word13'><%= list[13][0]%></a>
+    <a id='word14'><%= list[14][0]%></a>
+    <a id='word15'><%= list[15][0]%></a>
+    <a id='word16'><%= list[16][0]%></a>
+    <a id='word17'><%= list[17][0]%></a>
+    <a id='word18'><%= list[18][0]%></a>
+    <a id='word19'><%= list[19][0]%></a>
+
+
+
+
+
+
+<script type="text/javascript">
       /*!
        * Create an array of word objects, each representing a word in the cloud
        */
+       // freq = Word.group(:word_instance).count
+       // list = freq.sort_by{|word, count| count}.reverse
+
         var word_array = [
-          {text: "Lorem", weight: 15},
-          {text: "Ipsum", weight: 9, link: "http://jquery.com/"},
-          {text: "Dolor", weight: 6, html: {title: "I can haz any html attribute"}},
-          {text: "Sit", weight: 7},
-          {text: "Amet", weight: 5}
-          // ...as many words as you want
+          {text: $('#word0'), weight: 20},
+          {text: $('#word1'), weight: 19},
+          {text: $('#word2'), weight: 18},
+          {text: $('#word3'), weight: 17},
+          {text: $('#word4'), weight: 16},
+          {text: $('#word5'), weight: 15},
+          {text: $('#word6'), weight: 14},
+          {text: $('#word7'), weight: 13},
+          {text: $('#word8'), weight: 12},
+          {text: $('#word9'), weight: 10},
+          {text: $('#word10'), weight: 10},
+          {text: $('#word11'), weight: 10},
+          {text: $('#word12'), weight: 10},
+          {text: $('#word13'), weight: 10},
+          {text: $('#word14'), weight: 10},
+          {text: $('#word15'), weight: 9},
+          {text: $('#word16'), weight: 8},
+          {text: $('#word17'), weight: 7},
+          {text: $('#word18'), weight: 6},
+          {text: $('#word19'), weight: 5}
+
+
       ];
 
       $(document).ready(function() {

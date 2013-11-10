@@ -5,9 +5,9 @@ get '/' do
   erb :index
 end
 
-post '/' do
+# post '/' do
 
-  p params[:speech].inspect
-  redirect '/'
-end
+#   p params[:speech].inspect
+#   redirect '/'
+# end
 
