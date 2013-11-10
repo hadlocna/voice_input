@@ -14,21 +14,22 @@
   -->
   <link rel="stylesheet" href="/css/application.css">
 
-
-    <% system 'sox -d temp2.wav trim 0 00:05' %>
+    <% begin %>
+    <% system 'sox -d temp2.wav trim 0 00:10' %>
 
     <% audio = Speech::AudioToText.new("temp2.wav") %>
     <% whatisit(audio)%>
-    <% if audio.best_match_text != "" %>
-
     <% phrase = audio.to_text.inspect  %>
+    <%rescue %>
+    <%retry %>
+    <%end%>
     <% phrase.gsub!(/\A"|"\Z/, '') %>
     <% array = phrase.split(" ") %>
     <% array.each do |word| %>
 
     <% Word.create(word_instance: word) %>
     <% end %>
-    <% end %>
+
 
 
     <% freq = Word.group(:word_instance).count %>
